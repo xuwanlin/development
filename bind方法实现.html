@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    Function.prototype.myBind = function () {
+        var _this = this;
+        var obj = arguments[0];
+        var arr = Array.prototype.slice.call(arguments, 1)
+
+        var _fn = function () {
+            var arr2 = Array.prototype.slice.call(arguments, 0);
+            return _this.apply(obj, arr.concat(arr2))
+        }
+        return _fn
+    }
+    let obj = {}
+    function fn(x, y, z) {
+        this.x = x
+        this.y = y;
+        this.z = z;
+    }
+    newFn = fn.myBind(obj, 5)
+    console.log(newFn(3, 4));
+
+</script>
+</body>
+</html>
